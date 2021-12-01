@@ -1,5 +1,5 @@
-const APP_ID = "36385a6f";
-const APP_KEY = "45b5b9a7050303aef9fbee0d812be88e";
+const APP_ID = "f7133e8a";
+const APP_KEY = "52719ec4bb9f6785d6dfbd676a3a52fe";
 
 export const getFoodsByName = async (name) => {
   try {
@@ -12,11 +12,18 @@ export const getFoodsByName = async (name) => {
   }
 };
 
-export const getIngredientInfoByName = async (name) => {
+export const getIngredientInfoByName = async (ingredients) => {
   try {
+    let query = "";
+    ingredients.forEach((el, i) => {
+      if (i !== 0) query = query.concat(` and ${el.amount} of ${el.name}`);
+      else query = query.concat(`${el.amount} of ${el.name}`);
+    });
+
     const data = {
-      query: name,
+      query: query,
     };
+
     const resp = await fetch(
       `https://trackapi.nutritionix.com/v2/natural/nutrients`,
       {

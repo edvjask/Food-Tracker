@@ -4,9 +4,9 @@ import Typography from "@mui/material/Typography";
 import { Modal } from "@mui/material";
 import "./styles.css";
 import ReactPlayer from "react-player";
-import {useEffect, useState} from "react";
-import {getIngredientInfoByName} from "../../services/publicAPIService";
-import {NutritionTable} from "./NutritionTable";
+import { useEffect, useState } from "react";
+import { getIngredientInfoByName } from "../../services/publicAPIService";
+import { NutritionTable } from "./NutritionTable";
 
 export const FoodDetailsModal = ({ foodItem, open, handleClose }) => {
   const style = {
@@ -24,42 +24,38 @@ export const FoodDetailsModal = ({ foodItem, open, handleClose }) => {
 
   const [ingredients, setIngredients] = useState([]);
   const [ingredientsNutrition, setIngredientsNutrition] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (foodItem) {
       const ingr = [];
       [...Array(20)].forEach((el, i) => {
-
         const name = foodItem[`strIngredient${i + 1}`];
         const amount = foodItem[`strMeasure${i + 1}`];
 
         if (name) {
-          ingr.push({name: name, amount: amount})
+          ingr.push({ name: name, amount: amount });
         }
-      })
+      });
       setIngredients(ingr);
     }
-
-  }, [foodItem])
+  }, [foodItem]);
 
   //fetch calorie info for table
   useEffect(() => {
-
-    const info = [];
     const getInfo = async () => {
-      if (ingredients) {
-        for (const el of ingredients) {
-          const response = await getIngredientInfoByName(`${el.name} ${el.amount}`)
-          if (response && response.foods) {
-            info.push(response.foods[0]);
-          }
+      if (ingredients.length) {
+        setLoading(true);
+        const response = await getIngredientInfoByName(ingredients);
+        if (response && response.foods) {
+          setIngredientsNutrition(response.foods);
         }
-        setIngredientsNutrition(info);
+        setLoading(false);
       }
-    }
-    getInfo();
-  }, [ingredients])
+    };
 
+    getInfo();
+  }, [ingredients]);
 
   return (
     <>
@@ -78,9 +74,10 @@ export const FoodDetailsModal = ({ foodItem, open, handleClose }) => {
           <p>{foodItem && foodItem.strInstructions}</p>
           <Typography variant="h6">Ingredients:</Typography>
           <NutritionTable
-              nutritionInfo={ingredientsNutrition}
-              ingredients={ingredients}
-            />
+            nutritionInfo={ingredientsNutrition}
+            ingredients={ingredients}
+            loading={loading}
+          />
           <Typography
             variant={"h5"}
             sx={{

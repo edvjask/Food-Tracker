@@ -2,7 +2,7 @@ import * as React from "react";
 import { SearchInput } from "../SearchInput";
 import { useEffect, useState } from "react";
 
-export const DrinkSearchMain = ({}) => {
+export const DrinkSearchMain = () => {
   const [searchInput, setSearchInput] = useState("");
   const [toggleSearch, setToggleSearch] = useState(false);
 

@@ -13,12 +13,7 @@ import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HomeIcon from "@mui/icons-material/Home";
-import {
-  Link,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { Link, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { useEffect } from "react";
 import { Link as RouterLink, Outlet, useLocation } from "react-router-dom";
 import LocalBarIcon from "@mui/icons-material/LocalBar";
