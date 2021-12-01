@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { Button, TextField } from "@mui/material";
 
-export const FoodInput = ({ input, setInput, toggleSearch }) => {
+export const SearchInput = ({ input, setInput, toggleSearch, label }) => {
   const handleInput = (e) => {
     setInput(e.target.value);
   };
@@ -28,7 +28,7 @@ export const FoodInput = ({ input, setInput, toggleSearch }) => {
       >
         <TextField
           required
-          label={"Food name"}
+          label={label}
           value={input ?? ""}
           onChange={handleInput}
         />

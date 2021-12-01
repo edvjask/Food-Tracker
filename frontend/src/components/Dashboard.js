@@ -10,13 +10,18 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import HomeIcon from "@mui/icons-material/Home";
-import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import {
+  Link,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import { useEffect } from "react";
-import { FoodSelector } from "./FoodSelection/FoodSelector";
+import { Link as RouterLink, Outlet, useLocation } from "react-router-dom";
+import LocalBarIcon from "@mui/icons-material/LocalBar";
 
 function Copyright(props) {
   return (
@@ -35,6 +40,11 @@ function Copyright(props) {
     </Typography>
   );
 }
+
+const titles = {
+  "/": "Meal Search",
+  "/drinks": "Drink Search",
+};
 
 const drawerWidth = 240;
 
@@ -86,17 +96,15 @@ const mdTheme = createTheme();
 
 export function DashboardContent() {
   const [open, setOpen] = React.useState(true);
+  const [title, setTitle] = React.useState(titles["/"]);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const location = useLocation();
 
   useEffect(() => {
-    // const getAll = async () => {
-    //   const response = await getDefault();
-    //   console.log(response);
-    // };
-    // getAll();
-  }, []);
+    setTitle(titles[location.pathname]);
+  }, [location.pathname]);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -127,7 +135,7 @@ export function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              {title}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -146,11 +154,17 @@ export function DashboardContent() {
           </Toolbar>
           <Divider />
           <List>
-            <ListItem button component={Link} to={"/"}>
+            <ListItem button component={RouterLink} to={".."}>
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
               <ListItemText primary="Home" />
+            </ListItem>
+            <ListItem button component={RouterLink} to={"../drinks"}>
+              <ListItemIcon>
+                <LocalBarIcon />
+              </ListItemIcon>
+              <ListItemText primary="Drinks API" />
             </ListItem>
           </List>
         </Drawer>
@@ -169,7 +183,7 @@ export function DashboardContent() {
           <Toolbar />
           {/*####################DASHBOARD CONTENT###############################*/}
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <FoodSelector />
+            <Outlet />
           </Container>
           {/*####################DASHBOARD CONTENT###############################*/}
           <Copyright />

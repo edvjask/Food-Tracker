@@ -4,12 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { DrinkSearchMain } from "./components/DrinkSearch/DrinkSearchMain";
+import { FoodSelector } from "./components/FoodSelection/FoodSelector";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<App />}>
+          <Route path={"drinks"} element={<DrinkSearchMain />} />
+          <Route path={"/"} element={<FoodSelector />} />
+        </Route>
       </Routes>
     </Router>
   </React.StrictMode>,

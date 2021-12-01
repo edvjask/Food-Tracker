@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { getFoodsByName } from "../../services/foodsService";
+import { getFoodsByName } from "../../services/publicAPIService";
 import Box from "@mui/material/Box";
 import { FoodItem } from "./FoodItem";
-import { FoodInput } from "./FoodInput";
+import { SearchInput } from "../SearchInput";
 import { Alert, Snackbar } from "@mui/material";
 import { FoodDetailsModal } from "./FoodDetailsModal";
 
@@ -20,7 +20,7 @@ export const FoodSelector = () => {
       let resp = await getFoodsByName(foodInput);
       if (resp) {
         if (resp.meals) {
-          setFoods(resp.meals.slice(0, 3));
+          setFoods(resp.meals);
         } else {
           setSnackOpen(true);
         }
@@ -45,8 +45,9 @@ export const FoodSelector = () => {
 
   return (
     <>
-      <FoodInput
+      <SearchInput
         input={foodInput}
+        label={"Food Search"}
         setInput={setFoodInput}
         toggleSearch={setSearchToggle}
       />
@@ -62,7 +63,7 @@ export const FoodSelector = () => {
         }}
       >
         {foods &&
-          foods.map((el, i) => (
+          foods.map((el) => (
             <FoodItem
               key={el.idMeal}
               food={el}
