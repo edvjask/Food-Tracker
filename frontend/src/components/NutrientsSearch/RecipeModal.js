@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getInfoFromId } from "../../services/publicAPIService";
-import { Link, Modal } from "@mui/material";
+import { Modal } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import * as React from "react";

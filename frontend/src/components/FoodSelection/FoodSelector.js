@@ -29,6 +29,7 @@ export const FoodSelector = () => {
     if (foodInput) {
       getFoods();
     }
+    //eslint-disable-next-line
   }, [searchToggle]);
 
   const handleClose = (event, reason) => {

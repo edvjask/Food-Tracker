@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getRecipeByNutrients } from "../../services/publicAPIService";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
