@@ -75,7 +75,6 @@ export const FoodDetailsModal = ({ foodItem, open, handleClose }) => {
           <Typography variant="h6">Ingredients:</Typography>
           <NutritionTable
             nutritionInfo={ingredientsNutrition}
-            ingredients={ingredients}
             loading={loading}
           />
           <Typography

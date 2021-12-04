@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@mui/material";
 
-export const NutritionTable = ({ nutritionInfo, ingredients, loading }) => {
+export const NutritionTable = ({ nutritionInfo, loading }) => {
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -27,7 +27,7 @@ export const NutritionTable = ({ nutritionInfo, ingredients, loading }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {nutritionInfo.map((el, i) => (
+          {nutritionInfo.map((el) => (
             <TableRow
               key={el["food_name"]}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

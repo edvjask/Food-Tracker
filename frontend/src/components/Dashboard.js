@@ -12,11 +12,11 @@ import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import HomeIcon from "@mui/icons-material/Home";
 import { Link, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { useEffect } from "react";
 import { Link as RouterLink, Outlet, useLocation } from "react-router-dom";
-import LocalBarIcon from "@mui/icons-material/LocalBar";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 function Copyright(props) {
   return (
@@ -38,7 +38,7 @@ function Copyright(props) {
 
 const titles = {
   "/": "Meal Search",
-  "/drinks": "Drink Search",
+  "/by_nutrients": "Meal by Nutrients",
 };
 
 const drawerWidth = 240;
@@ -151,15 +151,15 @@ export function DashboardContent() {
           <List>
             <ListItem button component={RouterLink} to={".."}>
               <ListItemIcon>
-                <HomeIcon />
+                <MenuBookIcon />
               </ListItemIcon>
-              <ListItemText primary="Home" />
+              <ListItemText primary="Meal Search" />
             </ListItem>
-            <ListItem button component={RouterLink} to={"../drinks"}>
+            <ListItem button component={RouterLink} to={"../by_nutrients"}>
               <ListItemIcon>
-                <LocalBarIcon />
+                <RestaurantIcon />
               </ListItemIcon>
-              <ListItemText primary="Drinks API" />
+              <ListItemText primary="Recipe by Nutrients" />
             </ListItem>
           </List>
         </Drawer>
