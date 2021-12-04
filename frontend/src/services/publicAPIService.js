@@ -75,16 +75,16 @@ export const getRandomDrink = async () => {
 //recipe by nutrients
 
 //test object
-const values = {
-  minCarbs: 10,
-  maxCarbs: 150,
-  minProtein: 30,
-  maxProtein: 300,
-  minFat: 10,
-  maxFat: 50,
-  minCalories: 100,
-  maxCalories: 300,
-};
+// const values = {
+//   minCarbs: 10,
+//   maxCarbs: 150,
+//   minProtein: 30,
+//   maxProtein: 300,
+//   minFat: 10,
+//   maxFat: 50,
+//   minCalories: 100,
+//   maxCalories: 300,
+// };
 
 const BASE_URL = `https://api.spoonacular.com/recipes/findByNutrients?apiKey=${SPOONACULAR_API_KEY}`;
 export const getRecipeByNutrients = async (ingredients) => {
@@ -97,6 +97,17 @@ export const getRecipeByNutrients = async (ingredients) => {
       }
     });
     const resp = await fetch(urlToFetch);
+    return await resp.json();
+  } catch (ex) {
+    console.error(ex);
+  }
+};
+
+export const getInfoFromId = async (id) => {
+  try {
+    const resp = await fetch(
+      `https://api.spoonacular.com/recipes/${id}/information?apiKey=${SPOONACULAR_API_KEY}&includeNutrition=false`
+    );
     return await resp.json();
   } catch (ex) {
     console.error(ex);
