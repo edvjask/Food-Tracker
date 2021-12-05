@@ -45,9 +45,16 @@ router.patch("/:id", authenticated, async (req, res) => {
   if (req.body.name) {
     res.meal.name = req.body.name;
   }
-  if (req.body.meals) {
-    res.meal.meals = req.body.meals;
+  if (req.body.meals.breakfast) {
+    res.meal.meals.breakfast = req.body.meals.breakfast;
   }
+  if (req.body.meals.lunch) {
+    res.meal.meals.lunch = req.body.meals.lunch;
+  }
+  if (req.body.meals.dinner) {
+    res.meal.meals.dinner = req.body.meals.dinner;
+  }
+
   try {
     const updatedPlan = await res.meal.save();
     res.json(updatedPlan);

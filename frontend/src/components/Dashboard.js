@@ -24,7 +24,6 @@ import { Link as RouterLink, Outlet, useLocation } from "react-router-dom";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getSavedPlans } from "../services/internalAPI";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 function Copyright(props) {
@@ -115,34 +114,7 @@ export function DashboardContent() {
     loginWithRedirect,
     logout,
     user,
-    getAccessTokenSilently,
   } = useAuth0();
-
-  // useEffect(() => {
-  //   const getPlans = async () => {
-  //     try {
-  //       const token = await getAccessTokenSilently();
-  //       //console.log(res)
-  //       const resp = await getSavedPlans(token);
-  //       console.log(resp);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   }
-  //   getPlans();
-  // }, [])
-
-  useEffect(() => {
-    const getToken = async () => {
-      try {
-        const token = await getAccessTokenSilently({ ignoreCache: true });
-        console.log(token);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getToken();
-  }, []);
 
   return (
     <ThemeProvider theme={mdTheme}>

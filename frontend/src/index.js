@@ -7,6 +7,8 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ByNutrientSearchMain } from "./components/NutrientsSearch/ByNutrientSearchMain";
 import { FoodSelector } from "./components/FoodSelection/FoodSelector";
 import { Auth0Provider } from "@auth0/auth0-react";
+import {MealPlanMain} from "./components/MealPlans/MealPlanMain";
+import {ProtectedRoute} from "./routes/ProtectedRoute";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,6 +21,11 @@ ReactDOM.render(
       <Router>
         <Routes>
           <Route path="/" element={<App />}>
+              <Route path={"plans"} element={
+                  <ProtectedRoute>
+                  <MealPlanMain />
+                  </ProtectedRoute>
+              } />
             <Route path={"by_nutrients"} element={<ByNutrientSearchMain />} />
             <Route path={"/"} element={<FoodSelector />} />
           </Route>
