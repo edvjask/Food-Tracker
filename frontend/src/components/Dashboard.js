@@ -12,11 +12,20 @@ import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { Link, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import {
+  Button,
+  Link,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import { useEffect } from "react";
 import { Link as RouterLink, Outlet, useLocation } from "react-router-dom";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getSavedPlans } from "../services/internalAPI";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 function Copyright(props) {
   return (
@@ -101,6 +110,40 @@ export function DashboardContent() {
     setTitle(titles[location.pathname]);
   }, [location.pathname]);
 
+  const {
+    isAuthenticated,
+    loginWithRedirect,
+    logout,
+    user,
+    getAccessTokenSilently,
+  } = useAuth0();
+
+  // useEffect(() => {
+  //   const getPlans = async () => {
+  //     try {
+  //       const token = await getAccessTokenSilently();
+  //       //console.log(res)
+  //       const resp = await getSavedPlans(token);
+  //       console.log(resp);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }
+  //   getPlans();
+  // }, [])
+
+  useEffect(() => {
+    const getToken = async () => {
+      try {
+        const token = await getAccessTokenSilently({ ignoreCache: true });
+        console.log(token);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getToken();
+  }, []);
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
@@ -132,6 +175,31 @@ export function DashboardContent() {
             >
               {title}
             </Typography>
+            <Box sx={{ display: "flex", gap: "2px" }}>
+              <div>
+                {!isAuthenticated && (
+                  <Button
+                    color={"inherit"}
+                    onClick={() => loginWithRedirect({})}
+                  >
+                    Log in
+                  </Button>
+                )}
+                {isAuthenticated && (
+                  <div>
+                    Welcome back, {user.given_name}
+                    <Button
+                      color={"inherit"}
+                      onClick={() =>
+                        logout({ returnTo: window.location.origin })
+                      }
+                    >
+                      Log out
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </Box>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -161,6 +229,14 @@ export function DashboardContent() {
               </ListItemIcon>
               <ListItemText primary="Recipe by Nutrients" />
             </ListItem>
+            {isAuthenticated && (
+              <ListItem button component={RouterLink} to={"../plans"}>
+                <ListItemIcon>
+                  <BookmarkIcon />
+                </ListItemIcon>
+                <ListItemText primary="Saved plans" />
+              </ListItem>
+            )}
           </List>
         </Drawer>
         <Box
