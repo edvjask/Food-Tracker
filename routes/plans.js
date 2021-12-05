@@ -34,7 +34,7 @@ router.patch("/:id", authenticated, async (req, res) => {
   let meal;
   try {
     meal = await MealPlan.findById(req.params.id);
-    if (!meal) {
+    if (!meal || meal.owner !== req.user[namespace+'email']) {
       return res.status(404).json({ message: "Cannot find plan" });
     }
   } catch (err) {
@@ -63,7 +63,7 @@ router.delete("/:id", authenticated, async (req, res) => {
       await plan.remove();
       res.json({ message: "Deleted meal plan" });
     } else {
-      res.status(401).json({ message: "Cannot delete another user's plans" });
+      res.status(404).json({ message: "Plan not found" });
     }
   } catch (err) {
     res.status(500).json({ message: err.message });

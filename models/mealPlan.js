@@ -15,16 +15,31 @@ const mealPlanSchema = new mongoose.Schema({
   },
   meals: {
     breakfast: {
-      meal: String,
-      calories: Number,
+      meal: {
+        type: String,
+        default: "",
+      },
+      calories: {
+        type: Number,
+        default: 0},
     },
     lunch: {
-      meal: String,
-      calories: Number,
+        meal: {
+        type: String,
+        default: "",
+      },
+      calories: {
+        type: Number,
+        default: 0},
     },
     dinner: {
-      meal: String,
-      calories: Number,
+      meal: {
+        type: String,
+        default: "",
+      },
+      calories: {
+        type: Number,
+        default: 0},
     },
   },
 });

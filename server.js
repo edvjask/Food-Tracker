@@ -4,7 +4,6 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
-const {authenticated} = require('./security');
 
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
@@ -19,10 +18,6 @@ app.use(
     origin: "http://localhost:3000",
   })
 );
-
-const subscribersRouter = require("./routes/subscribers");
-app.use("/subscribers", subscribersRouter);
-
 
 const mealsRouter = require("./routes/plans");
 app.use("/plans", mealsRouter);
