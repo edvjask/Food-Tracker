@@ -8,7 +8,12 @@ import { useEffect, useState } from "react";
 import { getIngredientInfoByName } from "../../services/publicAPIService";
 import { NutritionTable } from "./NutritionTable";
 
-export const FoodDetailsModal = ({ foodItem, open, handleClose }) => {
+export const FoodDetailsModal = ({
+  foodItem,
+  open,
+  handleClose,
+  setCalculatedCals,
+}) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -49,6 +54,11 @@ export const FoodDetailsModal = ({ foodItem, open, handleClose }) => {
         const response = await getIngredientInfoByName(ingredients);
         if (response && response.foods) {
           setIngredientsNutrition(response.foods);
+          let total = 0;
+          response.foods.forEach((el, i) => {
+            total += el["nf_calories"];
+          });
+          setCalculatedCals(Math.round(total));
         }
         setLoading(false);
       }

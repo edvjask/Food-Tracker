@@ -109,12 +109,7 @@ export function DashboardContent() {
     setTitle(titles[location.pathname]);
   }, [location.pathname]);
 
-  const {
-    isAuthenticated,
-    loginWithRedirect,
-    logout,
-    user,
-  } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
 
   return (
     <ThemeProvider theme={mdTheme}>

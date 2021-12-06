@@ -6,6 +6,7 @@ import { FoodItem } from "./FoodItem";
 import { SearchInput } from "../SearchInput";
 import { Alert, Snackbar } from "@mui/material";
 import { FoodDetailsModal } from "./FoodDetailsModal";
+import { AddFoodDialog } from "./AddFoodDialog";
 
 export const FoodSelector = () => {
   const [foods, setFoods] = useState();
@@ -14,6 +15,9 @@ export const FoodSelector = () => {
   const [modalFoodItem, setModalFoodItem] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
+  const [mealToAdd, setMealToAdd] = useState();
+  const [addModalOpen, setAddModalOpen] = useState(false);
+  const [calculatedCals, setCalculatedCals] = useState(0);
 
   useEffect(() => {
     const getFoods = async () => {
@@ -59,7 +63,7 @@ export const FoodSelector = () => {
           "& > :not(style)": {
             m: 1,
             width: 320,
-            height: 320,
+            height: 380,
           },
         }}
       >
@@ -70,6 +74,9 @@ export const FoodSelector = () => {
               food={el}
               setModalOpen={setModalOpen}
               setActiveFoodItem={setModalFoodItem}
+              setMealToAdd={setMealToAdd}
+              setOpenAdd={setAddModalOpen}
+              calculatedCals={calculatedCals}
             />
           ))}
       </Box>
@@ -77,6 +84,12 @@ export const FoodSelector = () => {
         foodItem={modalFoodItem}
         open={modalOpen}
         handleClose={handleModalClose}
+        setCalculatedCals={setCalculatedCals}
+      />
+      <AddFoodDialog
+        open={addModalOpen}
+        setOpen={setAddModalOpen}
+        meal={mealToAdd}
       />
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
