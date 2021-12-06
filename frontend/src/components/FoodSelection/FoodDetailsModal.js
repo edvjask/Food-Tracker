@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { getIngredientInfoByName } from "../../services/publicAPIService";
 import { NutritionTable } from "./NutritionTable";
 import AddIcon from "@mui/icons-material/Add";
+import {useAuth0} from "@auth0/auth0-react";
 
 export const FoodDetailsModal = ({
   foodItem,
@@ -33,6 +34,8 @@ export const FoodDetailsModal = ({
   const [ingredientsNutrition, setIngredientsNutrition] = useState([]);
   const [loading, setLoading] = useState(false);
   const [calculatedCals, setCalculatedCals] = useState(0);
+
+  const {isAuthenticated} = useAuth0();
 
   useEffect(() => {
     if (foodItem) {
@@ -89,9 +92,9 @@ export const FoodDetailsModal = ({
             <Typography id="modal-modal-title" variant="h4">
               {foodItem && foodItem.strMeal}
             </Typography>
-            <IconButton size={"large"} onClick={handleAddMeal}>
+            {isAuthenticated ? <IconButton size={"large"} onClick={handleAddMeal}>
               <AddIcon sx={{ fontSize: "40px", fill: "#3F5DCA" }} />
-            </IconButton>
+            </IconButton> : null}
           </div>
           <Typography id="modal-modal-description" sx={{ mt: 2 }} />
           <Typography variant="h5">Instructions:</Typography>
