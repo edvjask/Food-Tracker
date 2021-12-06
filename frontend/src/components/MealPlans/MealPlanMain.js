@@ -68,6 +68,7 @@ export const MealPlanMain = () => {
       <DeleteDialog
         open={deleteDialogOpen}
         setOpen={setDeleteDialogOpen}
+        setRefreshPlans={setToggleRefresh}
         id={deleteId}
       />
     </>

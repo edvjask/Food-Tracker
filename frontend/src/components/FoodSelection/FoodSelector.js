@@ -85,6 +85,8 @@ export const FoodSelector = () => {
         open={modalOpen}
         handleClose={handleModalClose}
         setCalculatedCals={setCalculatedCals}
+        setOpenAdd={setAddModalOpen}
+        setMealToAdd={setMealToAdd}
       />
       <AddFoodDialog
         open={addModalOpen}

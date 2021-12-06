@@ -60,9 +60,6 @@ export const FoodItem = ({
         <Button variant={"outlined"} onClick={handleClick}>
           More
         </Button>
-        <IconButton onClick={handleAddMeal}>
-          <AddIcon />
-        </IconButton>
       </div>
     </Paper>
   );

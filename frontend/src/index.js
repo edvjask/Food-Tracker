@@ -12,13 +12,13 @@ import { ProtectedRoute } from "./routes/ProtectedRoute";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Auth0Provider
-      domain={"food-app-test-edvjask.eu.auth0.com"}
-      clientId={"R5fJg5063ysl9gc3FTGq0blk9u5wOWOD"}
-      audience={"http://api.food-app.edvjask.dev"}
-      redirectUri={window.location.origin}
-    >
-      <Router>
+    <Router>
+      <Auth0Provider
+        domain={"food-app-test-edvjask.eu.auth0.com"}
+        clientId={"R5fJg5063ysl9gc3FTGq0blk9u5wOWOD"}
+        audience={"http://api.food-app.edvjask.dev"}
+        redirectUri={window.location.origin}
+      >
         <Routes>
           <Route path="/" element={<App />}>
             <Route
@@ -33,8 +33,8 @@ ReactDOM.render(
             <Route path={"/"} element={<FoodSelector />} />
           </Route>
         </Routes>
-      </Router>
-    </Auth0Provider>
+      </Auth0Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );

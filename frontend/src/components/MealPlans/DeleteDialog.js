@@ -8,7 +8,7 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import { deletePlan } from "../../services/internalAPI";
 
-export const DeleteDialog = ({ id, open, setOpen }) => {
+export const DeleteDialog = ({ id, open, setOpen, setRefreshPlans }) => {
   const { getAccessTokenSilently } = useAuth0();
 
   const handleDelete = async (e) => {
@@ -18,6 +18,7 @@ export const DeleteDialog = ({ id, open, setOpen }) => {
         const token = await getAccessTokenSilently();
         const response = await deletePlan(token, id);
         if (response && response.status === 200) {
+          setRefreshPlans((value) => !value);
           handleClose();
         }
       } catch (e) {

@@ -14,15 +14,11 @@ export const getSavedPlans = async (token) => {
 
 export const addNewPlan = async (token, data) => {
   try {
-    return await axiosInstance.post(
-      "/plans",
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    return await axiosInstance.post("/plans", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   } catch (ex) {
     console.error(ex);
   }

@@ -1,18 +1,20 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Modal } from "@mui/material";
+import { IconButton, Modal } from "@mui/material";
 import "./styles.css";
 import ReactPlayer from "react-player";
 import { useEffect, useState } from "react";
 import { getIngredientInfoByName } from "../../services/publicAPIService";
 import { NutritionTable } from "./NutritionTable";
+import AddIcon from "@mui/icons-material/Add";
 
 export const FoodDetailsModal = ({
   foodItem,
   open,
   handleClose,
-  setCalculatedCals,
+  setOpenAdd,
+  setMealToAdd,
 }) => {
   const style = {
     position: "absolute",
@@ -30,6 +32,7 @@ export const FoodDetailsModal = ({
   const [ingredients, setIngredients] = useState([]);
   const [ingredientsNutrition, setIngredientsNutrition] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [calculatedCals, setCalculatedCals] = useState(0);
 
   useEffect(() => {
     if (foodItem) {
@@ -67,6 +70,12 @@ export const FoodDetailsModal = ({
     getInfo();
   }, [ingredients]);
 
+  const handleAddMeal = (e) => {
+    e.preventDefault();
+    setOpenAdd(true);
+    setMealToAdd({ name: foodItem.strMeal, cal: calculatedCals });
+  };
+
   return (
     <>
       <Modal
@@ -76,9 +85,14 @@ export const FoodDetailsModal = ({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4">
-            {foodItem && foodItem.strMeal}
-          </Typography>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography id="modal-modal-title" variant="h4">
+              {foodItem && foodItem.strMeal}
+            </Typography>
+            <IconButton size={"large"} onClick={handleAddMeal}>
+              <AddIcon sx={{ fontSize: "40px", fill: "#3F5DCA" }} />
+            </IconButton>
+          </div>
           <Typography id="modal-modal-description" sx={{ mt: 2 }} />
           <Typography variant="h5">Instructions:</Typography>
           <p>{foodItem && foodItem.strInstructions}</p>

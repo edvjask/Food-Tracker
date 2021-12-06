@@ -26,7 +26,7 @@ export const CreateNewDialog = ({ open, setOpen, setRefreshPlans }) => {
 
     try {
       const token = await getAccessTokenSilently();
-      const response = await addNewPlan(token, value);
+      const response = await addNewPlan(token, { name: value });
       if (response && response.status === 201) {
         setRefreshPlans((value) => !value);
         handleClose();
