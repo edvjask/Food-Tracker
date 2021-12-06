@@ -28,6 +28,7 @@ export const MealPlanMain = () => {
       }
     };
     getPlans();
+    //eslint-disable-next-line
   }, [toggleRefresh]);
 
   const handleAddPlan = (e) => {

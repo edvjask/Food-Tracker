@@ -120,6 +120,7 @@ export const AddFoodDialog = ({ meal, open, setOpen }) => {
       }
     };
     getPlans();
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {

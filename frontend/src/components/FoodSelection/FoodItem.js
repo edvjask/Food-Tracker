@@ -1,25 +1,15 @@
 import * as React from "react";
-import { Button, IconButton, Paper } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import AddIcon from "@mui/icons-material/Add";
 
 export const FoodItem = ({
   food,
   setActiveFoodItem,
   setModalOpen,
-  setOpenAdd,
-  setMealToAdd,
-  calculatedCals,
 }) => {
   const handleClick = () => {
     setActiveFoodItem(food);
     setModalOpen(true);
-  };
-
-  const handleAddMeal = (e) => {
-    e.preventDefault();
-    setOpenAdd(true);
-    setMealToAdd({ name: food.strMeal, cal: calculatedCals });
   };
 
   return (
