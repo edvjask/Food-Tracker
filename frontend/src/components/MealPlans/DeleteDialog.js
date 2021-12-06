@@ -33,7 +33,7 @@ export const DeleteDialog = ({ id, open, setOpen, setRefreshPlans }) => {
 
   return (
     <Dialog open={open} keepMounted onClose={handleClose}>
-      <DialogTitle>{"Create new meal plan"}</DialogTitle>
+      <DialogTitle>{"Delete Plan"}</DialogTitle>
       <DialogContent>Are you sure you want to delete this plan?</DialogContent>
       <DialogActions>
         <Button onClick={handleDelete}>Yes</Button>
